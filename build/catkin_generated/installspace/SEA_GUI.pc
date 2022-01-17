@@ -1,0 +1,8 @@
+prefix=/usr/local
+
+Name: SEA_GUI
+Description: Description of SEA_GUI
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

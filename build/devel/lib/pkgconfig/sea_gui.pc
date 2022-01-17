@@ -1,0 +1,8 @@
+prefix=/home/frat/catkin_ws/src/SEA_GUI/build/devel
+
+Name: sea_gui
+Description: Description of sea_gui
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 
