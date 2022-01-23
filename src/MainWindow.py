@@ -35,6 +35,7 @@ class Ui_MainWindow(QtWidgets.QMainWindow):
     
     def z_motor_callback(self,msg1):
         self.z_motor_sub_msg.data = msg1.data
+        print(self.z_motor_sub_msg.data )
 
     def ZSetClk(self):
         self.z_motor_pub_msg.data[2]=self.ZVelSetSB.value()
