@@ -2,7 +2,7 @@
 import matplotlib.pyplot  as plt
 from MainWindow import Ui_MainWindow
 import sys
-from PyQt5 import QtCore, QtGui, QtWidgets 
+from PyQt5 import QtCore, QtGui, QtWidgets
 
 
 

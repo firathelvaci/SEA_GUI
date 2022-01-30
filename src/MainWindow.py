@@ -9,7 +9,7 @@ import numpy as np
 from std_msgs.msg import String,Int32,Int32MultiArray,MultiArrayLayout,MultiArrayDimension,Float32MultiArray
 from rospy.numpy_msg import numpy_msg
 from rospy_tutorials.msg import Floats
-
+from GraphGUI import ui_GraphGUI
 
 
 class Ui_MainWindow(QtWidgets.QMainWindow):
@@ -24,14 +24,17 @@ class Ui_MainWindow(QtWidgets.QMainWindow):
         self.rate=rospy.Rate(2)
         self.z_motor_pub=rospy.Publisher('z_motor_pub',Float32MultiArray,queue_size=10)
         self.z_motor_sub = rospy.Subscriber('z_motor_sub',Float32MultiArray, self.z_motor_callback)
-
         self.StartBtn.clicked.connect(self.OnStartClk)
         self.StopBtn.clicked.connect(self.OnStopClk)
         self.ZSetBtn.clicked.connect(self.ZSetClk)
+        self.ZShowGraphBtn.clicked.connect(self.ZSetCZShowGraphlk)
         self.ManualRb.setChecked(True)
         x = threading.Thread(target=self.thread_function, args=(1,))
         x.start()
 
+    def ZSetCZShowGraphlk(self):
+        self.ui_graphgui=ui_GraphGUI()
+        self.ui_graphgui.show()
     
     def z_motor_callback(self,msg1):
         self.z_motor_sub_msg.data = msg1.data
