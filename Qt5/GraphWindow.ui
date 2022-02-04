@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>864</width>
-    <height>645</height>
+    <width>890</width>
+    <height>669</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -18,23 +18,10 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>60</y>
-      <width>841</width>
-      <height>521</height>
+      <y>10</y>
+      <width>871</width>
+      <height>611</height>
      </rect>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="pushButton_generate_random_signal">
-    <property name="geometry">
-     <rect>
-      <x>50</x>
-      <y>0</y>
-      <width>201</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Generate Random Sample</string>
     </property>
    </widget>
   </widget>
@@ -43,7 +30,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>864</width>
+     <width>890</width>
      <height>22</height>
     </rect>
    </property>
