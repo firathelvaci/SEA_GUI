@@ -8,6 +8,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 
 
 def main():
+
     app=QtWidgets.QApplication(sys.argv)
     mainwindow=Ui_MainWindow()
     widget=QtWidgets.QMainWindow()
@@ -21,7 +22,9 @@ def main():
         print("Closing window")
 
 
+
     
 if __name__=="__main__":
     main()
+
 

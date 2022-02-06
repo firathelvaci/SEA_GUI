@@ -1,4 +1,5 @@
 from array import array
+from optparse import Values
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.uic import loadUi
 import sys
@@ -21,7 +22,7 @@ class Ui_MainWindow(QtWidgets.QMainWindow):
         self.z_motor_pub_msg.data = np.zeros(4)
         self.z_motor_sub_msg.data = np.zeros(4)
         rospy.init_node('master_device')
-        self.rate=rospy.Rate(2)
+        self.rate=rospy.Rate(1)
         self.z_motor_pub=rospy.Publisher('z_motor_pub',Float32MultiArray,queue_size=10)
         self.z_motor_sub = rospy.Subscriber('z_motor_sub',Float32MultiArray, self.z_motor_callback)
         self.StartBtn.clicked.connect(self.OnStartClk)
@@ -29,16 +30,20 @@ class Ui_MainWindow(QtWidgets.QMainWindow):
         self.ZSetBtn.clicked.connect(self.ZSetClk)
         self.ZShowGraphBtn.clicked.connect(self.ZSetCZShowGraphlk)
         self.ManualRb.setChecked(True)
-        x = threading.Thread(target=self.thread_function, args=(1,))
-        x.start()
+        ros_thread= threading.Thread(target=self.ros_thread_function, args=(1,))
+        ros_thread.start()
+        self.ui_graphgui=ui_GraphGUI()
+        
+
 
     def ZSetCZShowGraphlk(self):
-        self.ui_graphgui=ui_GraphGUI()
         self.ui_graphgui.show()
     
     def z_motor_callback(self,msg1):
         self.z_motor_sub_msg.data = msg1.data
-        print(self.z_motor_sub_msg.data )
+        if (self.ui_graphgui.isVisible() == True):
+            self.ui_graphgui.update_values(self.z_motor_sub_msg.data[1] )
+
 
     def ZSetClk(self):
         self.z_motor_pub_msg.data[2]=self.ZVelSetSB.value()
@@ -56,10 +61,11 @@ class Ui_MainWindow(QtWidgets.QMainWindow):
         
 
     def OnStopClk(self):
+
         self.z_motor_pub_msg.data[0] = 0
         self.z_motor_pub_msg.data[1] = 0
     
-    def thread_function(self,name):
+    def ros_thread_function(self,name):
         
         while not rospy.is_shutdown():
            
@@ -69,5 +75,14 @@ class Ui_MainWindow(QtWidgets.QMainWindow):
             self.ZVelAcLbl.setText(str(round(self.z_motor_sub_msg.data[1],3)))
             self.ZTrqRefLbl.setText(str(round(self.z_motor_sub_msg.data[2],3)))
             self.ZTrqAcLbl.setText(str(round(self.z_motor_sub_msg.data[3],3)))
+
+            if (self.z_motor_pub_msg.data[0] == 1):
+                self.StartBtn.setStyleSheet("background-color: green")
+                self.StopBtn.setStyleSheet("background-color: #efefef")
+            else:
+                self.StopBtn.setStyleSheet("background-color: red")
+                self.StartBtn.setStyleSheet("background-color: #efefef")
+    
+
 
         
